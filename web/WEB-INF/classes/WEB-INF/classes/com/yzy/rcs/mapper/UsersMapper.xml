@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.rcs.mapper.UsersMapper">
+    <select id="login" resultType="com.yzy.rcs.domain.Users" parameterType="com.yzy.rcs.domain.Users">
+        select * from users where username=#{username} and userpwd=#{userpwd}
+    </select>
+
+    <select id="loadAll" parameterType="com.yzy.rcs.vo.UsersVo" resultType="com.yzy.rcs.domain.Users">
+        select * from users
+    </select>
+
+
+    <select id="findKey" parameterType="java.lang.String" resultType="com.yzy.rcs.domain.Users">
+        select * from users
+        <where>
+
+                fullname like CONCAT('%',#{keywords},'%')
+
+        </where>
+    </select>
+
+    <insert id="saveUsers" parameterType="com.yzy.rcs.domain.Users">
+        insert into users values(#{username},#{identity},#{fullname},#{sex},#{address},#{phone},#{userpwd},#{position})
+    </insert>
+
+    <update id="updateUsers" parameterType="com.yzy.rcs.domain.Users" >
+        update users set `identity`=#{identity},fullname=#{fullname},sex=#{sex},address=#{address},phone=#{phone},userpwd=#{userpwd},`position`=#{position} where username=#{username}
+    </update>
+
+    <delete id="delUsers" parameterType="com.yzy.rcs.domain.Users">
+        DELETE from users where username=#{username}
+    </delete>
+
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.rcs.mapper.ChecksMapper">
+
+    <insert id="saveChecks" parameterType="com.yzy.rcs.domain.Checks">
+        insert into checks values(#{checkid},#{checkdate},#{field},#{problem},#{paying},#{username},#{rentid})
+    </insert>
+
+    <select id="findAllChecks"  resultType="com.yzy.rcs.domain.Checks">
+        select * from checks
+    </select>
+
+    <update id="updateChecks" parameterType="com.yzy.rcs.domain.Checks">
+        update checks set checkdate=#{checkdate},field=#{field},problem=#{problem},paying=#{paying},username=#{username},rentid=#{rentid} where checkid=#{checkid}
+    </update>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.rcs.mapper.MenusMapper">
+    <!-- 查询菜单信息 -->
+    <select id="loadMenusResources" resultType="com.yzy.rcs.domain.Menus"
+            parameterType="java.lang.String">
+        select distinct m.* from menus m
+        inner join role_menu rm on m.mid=rm.mid
+        inner join user_role ur on ur.rid=rm.rid
+        where ur.username=#{username}
+
+    </select>
+
+    <!-- 查询所有菜单信息 -->
+    <select id="loadMenus" resultType="com.yzy.rcs.domain.Menus">
+        select * from menus
+    </select>
+</mapper>

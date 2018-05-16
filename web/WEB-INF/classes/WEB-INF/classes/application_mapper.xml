@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+       ">
+        
+        <!-- 实例化数据库连接池 -->
+        <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        	<!-- 注入数据库连接信息 -->
+        	<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+        	<property name="url" value="jdbc:mysql://127.0.0.1/rcs"></property>
+        	<property name="username" value="root"></property>
+        	<property name="password" value="root"></property>
+            <property name="defaultAutoCommit" value="false"/>
+        	
+        </bean>
+        
+        <!-- 实例化SqlSessionFactory -->
+        <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        	<!-- 注入dataSource数据库连接池 -->
+        	<property name="dataSource" ref="dataSource"></property>
+        	<!-- 配置分页插件 -->
+        	<property name="plugins">
+        		<list>
+        			<bean class="com.github.pagehelper.PageHelper">
+        				<property name="properties">
+        					<props>
+        						<!-- 配置分页插件的方言 -->
+        						<prop key="dialect">mysql</prop>
+        						<!-- 分页的合理化参数 -->
+        						<prop key="reasonable">true</prop>
+        						
+        					</props>
+        				</property>
+        			</bean>
+        		</list>
+        	</property>
+        	 
+        </bean>
+        <!--
+        	产生Mappper接口的代理对象
+        	MapperScannerConfigurer：扫描com.bjsxt.mapper接口中的接口文件和xml文件
+        							 然后产生接口的代理对象
+        							 
+        	规范：将mapper.java 和  mapper.xml放入统一包
+        		 mapper.java  和   mapper.xml 文件名字一样
+        		 
+        	代理对象的id：mapper接口的名字第一个字母小写	 
+         -->
+         <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+         	<!-- 注入Mapper接口所在的包 -->
+         	<property name="basePackage" value="com.yzy.rcs.mapper"></property>
+         	<!-- 注入sqlSessionFactory -->
+         	<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+         </bean>
+</beans>

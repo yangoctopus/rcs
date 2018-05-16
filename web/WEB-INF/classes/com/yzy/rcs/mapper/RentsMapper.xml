@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.rcs.mapper.RentsMapper">
+
+    <select id="findAllRents" parameterType="com.yzy.rcs.domain.Rents" resultType="com.yzy.rcs.domain.Rents">
+        select * from rents where 1=1
+
+            <if test="begindate != null and begindate != '' and returndate != null and returndate != '' ">
+                and begindate &gt;= #{begindate} and returndate &lt;= #{returndate}
+            </if>
+
+    </select>
+
+    <select id="loadRentsRentid" parameterType="com.yzy.rcs.domain.Rents" resultType="com.yzy.rcs.domain.Rents">
+        select * from rents where rentid=#{rentid}
+    </select>
+
+    <insert id="saveRents" parameterType="com.yzy.rcs.domain.Rents">
+        insert into rents values(#{rentid},#{price},#{begindate},#{returndate},#{rentflag},#{custid},#{carid},#{username})
+    </insert>
+
+    <update id="updateRents" parameterType="com.yzy.rcs.domain.Rents" >
+        update rents set price=#{price},rentflag=#{rentflag},custid=#{custid},carid=#{carid},username=#{username} where rentid=#{rentid}
+    </update>
+
+    <update id="updateRentsStatus" parameterType="com.yzy.rcs.domain.Rents" >
+        update rents set rentflag=#{rentflag} where rentid=#{rentid}
+    </update>
+
+    <delete id="delRents" parameterType="com.yzy.rcs.domain.Rents">
+        delete from rents where rentid=#{rentid}
+    </delete>
+
+
+
+</mapper>

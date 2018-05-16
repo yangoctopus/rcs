@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.rcs.mapper.CustomerMapper">
+
+    <select id="findCustomerKey" parameterType="com.yzy.rcs.domain.Customer" resultType="com.yzy.rcs.domain.Customer">
+        select * from customers
+        <where>
+
+            <if test="keywords != null and keywords != '' ">
+                identity like CONCAT('%',#{keywords},'%') or custname like CONCAT('%',#{keywords},'%')
+            </if>
+
+        </where>
+    </select>
+
+    <select id="findById" parameterType="java.lang.String" resultType="com.yzy.rcs.domain.Customer">
+        select * from customers where identity=#{identity}
+    </select>
+
+    <insert id="saveCustomer" parameterType="com.yzy.rcs.domain.Customer">
+        insert into Customers values(#{identity},#{custname},#{sex},#{address},#{phone},#{career})
+    </insert>
+
+    <update id="updateCustomer" parameterType="com.yzy.rcs.domain.Customer" >
+        update customers set custname=#{custname},sex=#{sex},address=#{address},phone=#{phone},career=#{career} where identity=#{identity}
+    </update>
+
+    <delete id="delCustomer" parameterType="com.yzy.rcs.domain.Customer">
+        delete from customers where identity=#{identity}
+    </delete>
+
+</mapper>

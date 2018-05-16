@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.rcs.mapper.RoleMenusMapper">
+
+    <!-- 建立角色和资源的关系 -->
+    <insert id="saveRoleMenus" parameterType="com.yzy.rcs.domain.RoleMenus">
+        insert into  role_menu  values (#{rid},#{mid})
+    </insert>
+
+
+    <!-- 删除某个角色对应的资源（删除中间表） -->
+    <delete id="deleteRoleMenus" parameterType="java.lang.Integer">
+        delete from role_menu where rid=#{roleid}
+    </delete>
+
+    <!-- 查询某个角色对应的资源 -->
+    <select id="loadRoleMenus" parameterType="java.lang.Integer"
+            resultType="com.yzy.rcs.domain.RoleMenus">
+        select * from role_menu where rid=#{roleid}
+    </select>
+
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.rcs.mapper.CarsMapper">
+
+    <select id="findCarsKey" parameterType="com.yzy.rcs.domain.Cars" resultType="com.yzy.rcs.domain.Cars">
+        select * from cars
+        <where>
+            <if test="keywords != null and keywords != '' ">
+                cartype like CONCAT('%',#{keywords},'%') or color like CONCAT('%',#{keywords},'%') or description like CONCAT('%',#{keywords},'%')
+            </if>
+
+        </where>
+    </select>
+
+    <select id="loadCarsListStatus" parameterType="java.lang.String" resultType="com.yzy.rcs.domain.Cars">
+        select * from cars where isrenting=#{isrenting}
+
+    </select>
+
+    <select id="findByCarid" parameterType="java.lang.String" resultType="com.yzy.rcs.domain.Cars">
+        select * from cars where carnumber=#{carnumber}
+
+    </select>
+    <insert id="saveCars" parameterType="com.yzy.rcs.domain.Cars">
+        insert into cars values(#{carnumber},#{cartype},#{color},#{price},#{rentprice},#{deposit},#{isrenting},#{description},#{carimg})
+    </insert>
+
+    <update id="updateCars" parameterType="com.yzy.rcs.domain.Cars" >
+        update cars set cartype=#{cartype},color=#{color},price=#{price},rentprice=#{rentprice},deposit=#{deposit},isrenting=#{isrenting},description=#{description},carimg=#{carimg} where carnumber=#{carnumber}
+    </update>
+
+    <update id="updateCarsStatus" parameterType="com.yzy.rcs.domain.Cars" >
+        update cars set isrenting=#{isrenting} where carnumber=#{carnumber}
+    </update>
+
+    <delete id="delCars" parameterType="com.yzy.rcs.domain.Cars">
+        delete from cars where carnumber=#{carnumber}
+    </delete>
+
+</mapper>

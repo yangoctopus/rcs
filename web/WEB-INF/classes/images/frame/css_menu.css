@@ -1,0 +1,64 @@
+/* CSS Document */
+/*a.menu:link {
+	color: #327099;
+	width:162px;border:1px solid #D1EEFC;
+	background:#F7FCFF;
+	display: block;
+	text-decoration: none;
+	height: 24px;
+	}
+a.menu:visited {
+	color: #327099;	width:162px;border:1px solid #D1EEFC;
+	background:#F7FCFF
+}
+a.menu:hover {
+	color: #AC4E0F;	width:162px;border:1px solid #F5D298; 
+	background:#FFFBE6
+}
+a.menu:active {
+	color: #327099;	width:162px;border:1px solid #D1EEFC;
+	background:#F7FCFF
+}*/
+
+  
+
+a.left:link {
+	font-size: 9pt;
+	line-height: 26px;
+	color: #327099;
+	background-image: url(pu2.jpg);
+	letter-spacing: 1px;
+	text-decoration: none;
+	display: block;
+	background-repeat: no-repeat;
+}
+a.left:visited {
+	font-size: 9pt;
+	color: #327099;
+	background-image: url(pu2.jpg);
+	letter-spacing: 1px;
+	text-decoration: none;
+	line-height: 26px;
+	display: block;
+	background-repeat: no-repeat;
+}
+a.left:hover {
+	font-size: 9pt;
+	color: #AC4E0F;
+	background-image: url(pu1.jpg);
+	letter-spacing: 1px;
+	line-height: 26px;
+	text-decoration: none;
+	background-repeat: no-repeat;
+	display: block;
+}
+a.left:active {
+	font-size: 9pt;
+	color: #327099;
+	background-image: url(pu2.jpg);
+	letter-spacing: 1px;
+	text-decoration: none;	
+	line-height: 26px;
+	display: block;
+	background-repeat: no-repeat;
+}

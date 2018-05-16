@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yzy.rcs.mapper.EmodelMapper">
+	 
+    
+    <!--  统计出租单表中的年份 -->
+    <select id="loadRentsYear" resultType="com.yzy.rcs.domain.Emodel">
+    	select distinct SUBSTR(begindate,1,4) yr from rents
+    </select>
+    
+    <select id="loadYearSellData" resultType="com.yzy.rcs.domain.Emodel"
+    	parameterType="java.lang.String">
+    	
+		select  substr(begindate,6,2) mh ,sum(price) total from rents
+		where substr(begindate,1,4)=#{year}
+		group by substr(begindate,6,2)
+		order by substr(begindate,6,2)
+    	
+    </select>
+
+
+    <select id="loadAddrCount" resultType="com.yzy.rcs.domain.Emodel">
+        select count(*) count,address from customers GROUP BY address
+    </select>
+</mapper>

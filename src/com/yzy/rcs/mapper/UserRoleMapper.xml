@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yzy.rcs.mapper.UserRoleMapper">
+
+    <insert id="saveUserRole" parameterType="com.yzy.rcs.domain.UserRole">
+        insert into user_role values(#{rid},#{username})
+    </insert>
+
+    <delete id="delUserRole" parameterType="com.yzy.rcs.domain.UserRole">
+        delete from user_role where username=#{username}
+    </delete>
+
+    <!-- 查询用户对于的角色信息 -->
+    <select id="loadUserRole" parameterType="java.lang.String"
+            resultType="java.lang.Integer">
+        select * from user_role where username=#{username}
+    </select>
+
+
+</mapper>
